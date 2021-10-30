@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { API_ENDPOINT } from './context';
+import useFetch from './useFetch';
 const urlNoPicture =
   'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
 
 const SingleMovie = () => {
-  const [loading, setLoading] = useState(false);
-  const [movie, setMovie] = useState(null);
   const { id } = useParams();
-  const urlSingleMovie = `${API_ENDPOINT}&i=${id}`;
-
-  const getMovie = async (url) => {
-    setLoading(true);
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      data.Poster = data.Poster !== 'N/A' ? data.Poster : urlNoPicture;
-      setMovie(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    console.log('singlemovie');
-    getMovie(urlSingleMovie);
-    // eslint-disable-next-line
-  }, [id]);
+  const { loading, error, data: movie } = useFetch(`&i=${id}`);
 
   if (loading) {
-    return <h1 className='loading'>Loading ...</h1>;
+    return <div className='loading'>Loading ...</div>;
   }
 
-  if (!movie) {
-    return <h2 className='section-title'>no movie to display</h2>;
+  if (error.show) {
+    return (
+      <div className='page-error'>
+        <h1>{error.msg}</h1>
+        <Link to='/' className='btn'>
+          back to movies
+        </Link>
+      </div>
+    );
   }
+
+  movie.Poster = movie.Poster !== 'N/A' ? movie.Poster : urlNoPicture;
 
   return (
     <section className='single-movie'>

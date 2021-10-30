@@ -2,12 +2,10 @@ import React from 'react';
 import { useGlobalContext } from './context';
 
 const SearchForm = () => {
-  const { search, setSearch, getMovies, urlSearch, error } = useGlobalContext();
+  const { search, setSearch, error } = useGlobalContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('search');
-    getMovies(urlSearch);
   };
 
   return (
@@ -20,7 +18,7 @@ const SearchForm = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         ></input>
-        {error ? <div className='error'>movie not found</div> : null}
+        {error.show && <div className='error'>{error.msg}</div>}
       </form>
     </>
   );
