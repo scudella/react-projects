@@ -3,21 +3,18 @@ import React from 'react';
 import { useGlobalContext } from './context';
 
 const Stories = () => {
-  const { news, loading, removeStory } = useGlobalContext();
-  console.log(news);
+  const { hits, loading, removeStory } = useGlobalContext();
+
   if (loading) {
     return <div className='loading'>Loading ...</div>;
   }
-  if (!news) {
-    return <div>News is empty</div>;
+  if (!hits) {
+    return <div>Hits is empty</div>;
   }
-  if (!news.hits) {
-    return <div>hits is empty</div>;
-  }
-  const stories = news.hits;
+
   return (
     <section className='stories'>
-      {stories.map((story) => {
+      {hits.map((story) => {
         const {
           author,
           num_comments,

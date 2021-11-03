@@ -12,10 +12,11 @@ import reducer from './reducer';
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?';
 
 const initialState = {
-  loading: false,
-  news: {},
+  loading: true,
+  hits: [],
   search: 'react 18',
   page: 0,
+  nbPages: 0,
 };
 
 const AppContext = React.createContext();
@@ -31,12 +32,14 @@ const AppProvider = ({ children }) => {
       try {
         const response = await fetch(url);
         const news = await response.json();
-        dispatch({ type: SET_STORIES, payload: news });
+        dispatch({
+          type: SET_STORIES,
+          payload: { hits: news.hits, nbPages: news.nbPages },
+        });
       } catch (error) {
         console.log(error);
       }
     }
-    console.log('useeffect');
     fetchNews();
   }, [page, search]);
 
@@ -44,8 +47,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_SEARCH, payload: value });
   };
 
-  const handlePage = ({ page, mode }) => {
-    dispatch({ type: HANDLE_PAGE, payload: { page, mode } });
+  const handlePage = (mode) => {
+    dispatch({ type: HANDLE_PAGE, payload: mode });
   };
 
   const removeStory = (id) => {

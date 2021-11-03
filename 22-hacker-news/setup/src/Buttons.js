@@ -2,14 +2,13 @@ import React from 'react';
 import { useGlobalContext } from './context';
 
 const Buttons = () => {
-  const { news, handlePage } = useGlobalContext();
-  const { page, nbPages } = news;
+  const { loading, handlePage, page, nbPages } = useGlobalContext();
   return (
     <div className='btn-container'>
       <button
-        onClick={(e) => {
-          e.preventDefault();
-          handlePage({ page: page, mode: 'dec' });
+        disabled={loading}
+        onClick={() => {
+          handlePage('dec');
         }}
       >
         prev
@@ -18,9 +17,9 @@ const Buttons = () => {
         {page ? page + 1 : 1} of {nbPages ? nbPages : null}
       </p>
       <button
-        onClick={(e) => {
-          e.preventDefault();
-          handlePage({ page: page, mode: 'inc' });
+        disabled={loading}
+        onClick={() => {
+          handlePage('inc');
         }}
       >
         next
