@@ -1,3 +1,8 @@
-export const formatPrice = () => {}
+export const formatPrice = (number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(number / 100);
+};
 
-export const getUniqueValues = () => {}
+export const getUniqueValues = () => {};
