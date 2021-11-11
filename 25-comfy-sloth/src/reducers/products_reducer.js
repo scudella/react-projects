@@ -17,7 +17,7 @@ const products_reducer = (state, action) => {
     return { ...state, isSidebarOpen: false };
   }
   if (action.type === GET_PRODUCTS_BEGIN) {
-    return { ...state, productLoading: true };
+    return { ...state, productsLoading: true };
   }
   if (action.type === GET_PRODUCTS_SUCCESS) {
     const featuredProducts = action.payload.filter(
