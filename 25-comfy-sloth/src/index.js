@@ -8,9 +8,8 @@ import { CartProvider } from './context/cart_context';
 import { UserProvider } from './context/user_context';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-{
-  /* Filter needs to be inside Products, as it is using its hooks*/
-}
+/* Filter needs to be inside Products, as it is using its hooks*/
+
 ReactDOM.render(
   <ProductsProvider>
     <FilterProvider>
