@@ -13,7 +13,6 @@ import {
 } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Product from '../components/Product';
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -27,6 +26,7 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
   }, [id]);
 
   // This is a way to redirect to root
@@ -37,6 +37,7 @@ const SingleProductPage = () => {
         history.push('/');
       }, 3000);
     }
+    // eslint-disable-next-line
   }, [error]);
 
   if (loading) {
