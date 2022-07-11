@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+const BigSidebar = () => {
+  return (
+    <Wrapper>
+      <h2>BigSidebar</h2>;
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.aside`
   display: none;
@@ -62,5 +70,6 @@ const Wrapper = styled.aside`
       color: var(--primary-500);
     }
   }
-`
-export default Wrapper
+`;
+
+export default BigSidebar;

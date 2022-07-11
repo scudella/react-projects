@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+const Navbar = () => {
+  return (
+    <Wrapper>
+      <h2>Navbar</h2>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.nav`
   height: var(--nav-height);
@@ -80,5 +88,6 @@ const Wrapper = styled.nav`
       display: block;
     }
   }
-`
-export default Wrapper
+`;
+
+export default Navbar;

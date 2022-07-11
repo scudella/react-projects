@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+const SmallSidebar = () => {
+  return (
+    <Wrapper>
+      <h2>SmallSidebar</h2>;
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.aside`
   @media (min-width: 992px) {
@@ -72,5 +80,6 @@ const Wrapper = styled.aside`
   .active .icon {
     color: var(--primary-500);
   }
-`
-export default Wrapper
+`;
+
+export default SmallSidebar;
