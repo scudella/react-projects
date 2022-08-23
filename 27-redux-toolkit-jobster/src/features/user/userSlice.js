@@ -6,6 +6,8 @@ import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from '../../utils/localStorage';
+import { clearAllJobsState } from '../allJobs/allJobsSlice';
+import { clearValues } from '../job/jobSlice';
 
 const initialState = {
   isLoading: false,
@@ -49,6 +51,20 @@ export const updateUser = createAsyncThunk(
         return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
       }
       return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const clearStore = createAsyncThunk(
+  'user/clearStore',
+  async (message, thunkAPI) => {
+    try {
+      thunkAPI.dispatch(logoutUser(message));
+      thunkAPI.dispatch(clearAllJobsState());
+      thunkAPI.dispatch(clearValues());
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject();
     }
   }
 );
@@ -111,6 +127,9 @@ const userSlice = createSlice({
     [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    [clearStore.rejected]: () => {
+      toast.error('There was an error...');
     },
   },
 });
