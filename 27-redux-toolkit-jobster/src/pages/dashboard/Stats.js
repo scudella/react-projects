@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StatsContainer, Loading, ChartsContainer } from '../../components';
+import { StatsContainer, ChartsContainer } from '../../components';
 import { showStats } from '../../features/allJobs/allJobsSlice';
 
 const Stats = () => {
-  const { isLoading, monthlyApplications } = useSelector(
+  const { monthlyApplications } = useSelector(
     (store) => store.allJobs
   );
   const dispatch = useDispatch();
