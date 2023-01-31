@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { ProductsProvider } from './context/products_context';
@@ -13,7 +13,9 @@ const clientId = process.env.REACT_APP_CLIENT_ID;
 
 /* Filter needs to be inside Products, as it is using its hooks*/
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <Auth0Provider
     domain={domain}
     clientId={clientId}
@@ -29,7 +31,5 @@ ReactDOM.render(
         </FilterProvider>
       </ProductsProvider>
     </UserProvider>
-  </Auth0Provider>,
-
-  document.getElementById('root')
+  </Auth0Provider>
 );
