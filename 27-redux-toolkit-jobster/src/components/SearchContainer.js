@@ -6,7 +6,7 @@ import { useState, useMemo } from 'react';
 
 const SearchContainer = () => {
   const [localSearch, setLocalSearch] = useState('');
-  const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
+  const { isLoading, searchStatus, searchType, sort, sortOptions } =
     useSelector((store) => store.allJobs);
   const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
   const dispatch = useDispatch();
@@ -30,8 +30,7 @@ const SearchContainer = () => {
       }, 1000);
     };
   };
-
-  const optimizedDebounce = useMemo(() => debounce(), []);
+  const optimizedDebounce = useMemo(() => debounce(), []); //eslint-disable-line
 
   return (
     <Wrapper>
